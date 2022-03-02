@@ -7,9 +7,9 @@
 # Description of Program: Converts from metric to english and english to metric
 
 def intro():
-    print("Welcome to the English/Metric conversion utility.\n")
-    print("This utility allows you to convert between English units")
-    print("(miles, feet, inches) and metric units (kilometers, meters,")
+    print("\nWelcome to the English/Metric conversion utility.\n")
+    print("This utility allows you to convert between English units ")
+    print("(miles, feet, inches) and metric units (kilometers, meters, ")
     print("centimeters).")
 
 footToMeter = 0.3048
@@ -26,16 +26,16 @@ def barrier():
     print()
     
 def ErrorMessage():
-    print("\nERORR: Answer must be 1, 2, or 3. Try again.\n")
+    print("ERROR: Answer must be 1, 2 or 3. Try again.\n")
 
 def q1():
     while(True):
         barrier()
         print("Which direction would you like to convert: ")
-        print("\tFor English to Metric type: 1")
-        print("\tFor Metric to English type: 2")
-        print("\tTo Quit type:\t\t    3\n")
-        direction = input("Input your answer (1, 2, or 3): ")
+        print("   For English to Metric type: 1")
+        print("   For Metric to English type: 2")
+        print("   To Quit type:               3\n")
+        direction = input("   Input your answer (1, 2 or 3): ")
         print()
         if direction == "3":
             print("Thanks for using our converter. Goodbye!")
@@ -50,10 +50,10 @@ def q2(direction):
     if direction == 1:
         while(True):
             print("Select English units to convert to metric equivalent: ")
-            print("\tFor miles type:    1")
-            print("\tFor feet type:     2")
-            print("\tFor inches type:   3\n")
-            unitConvert = input("Choose English units to convert (1, 2, or 3): ")
+            print("   For miles type:  1")
+            print("   For feet type:   2")
+            print("   For inches type: 3\n")
+            unitConvert = input("   Choose English units to convert (1, 2 or 3): ")
             print()
             if unitConvert == "1":
                 unitName1 = "miles"
@@ -68,10 +68,10 @@ def q2(direction):
     elif direction == 2:
         while(True):
             print("Select metric units to convert to English equivalent: ")
-            print("\tFor kilometers type:    1")
-            print("\tFor meters type:        2") 
-            print("\tFor centimeters type:   3\n")
-            unitConvert = input("Choose metric units to convert (1, 2, or 3): ")
+            print("   For kilometers type:  1")
+            print("   For meters type:      2") 
+            print("   For centimeters type: 3\n")
+            unitConvert = input("   Choose metric units to convert (1, 2 or 3): ")
             print()
             if unitConvert == "1":
                 unitName1 = "kilometers"
@@ -91,10 +91,10 @@ def q3(direction, unitConvert, unitName1):
     if direction == 2:
         while(True):
             print("Convert to which English units: ")
-            print("\tFor miles type:    1")
-            print("\tFor feet type:     2")
-            print("\tFor inches type:   3\n")
-            unitTarget = input("Choose target metric units (1, 2, or 3): ")
+            print("   For miles type:  1")
+            print("   For feet type:   2")
+            print("   For inches type: 3\n")
+            unitTarget = input("   Choose target English units (1, 2 or 3): ")
             print()
             if unitTarget == "1":
                 unitName2 = "miles"
@@ -109,10 +109,10 @@ def q3(direction, unitConvert, unitName1):
     elif direction == 1:
         while(True):
             print("Convert to which metric units: ")
-            print("\tFor kilometers type:    1")
-            print("\tFor meters type:        2")
-            print("\tFor centimeters type:   3\n")
-            unitTarget = input("Choose target English units (1, 2, or 3): ")
+            print("   For kilometers type:  1")
+            print("   For meters type:      2")
+            print("   For centimeters type: 3\n")
+            unitTarget = input("   Choose target metric units (1, 2 or 3): ")
             print()
             if unitTarget == "1":
                 unitName2 = "kilometers"
