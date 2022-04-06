@@ -7,14 +7,23 @@
 # Description of Program: Given input integer N, the program generates a list of N Fibonnaci numbers
 
 
-values = ["0", "1", "2", "3", "4", "5", "6"]
+commands = ["0", "1", "2", "3", "4", "5", "6"]
 
 def errorMessage():
     print("ERROR: Answer must be 1, 2 or 3. Try again.\n")
 
+def errorQuestion(str, vals):
+    while True:
+        num = input(str)
+
+        if num in vals:
+            break
+        else:
+            errorMessage()
+    return int(num)
+
     
 def intro():
-    correct = False
     print("Welcome to the Fibonnaci Number laboratory!\n")
     print("The following commands are available:")
     print("  0: Exit.")
@@ -25,18 +34,7 @@ def intro():
     print("  5: Find a list of the largest Fibonnaci numbers that add up to N.")
     print("  6: Display this help message. \n")
     
-    while not correct:
-        num = input("Please enter a command (0, 1, 2, 3, 4, 5 or 6): ")
-        # for i in range(len(values)):
-            # if values[i] == num:
-                # correct = True
-        # if not correct:
-            # ErrorMessage()
-        if num in values:
-            correct = True
-        else:
-            errorMessage()
-    return int(num)
+    return errorQuestion("Please enter a command (0, 1, 2, 3, 4, 5 or 6): ", commands)
 
 
 
@@ -129,7 +127,7 @@ if num == 0:
     print("\nThanks for using the Fibonnaci Labratory! Goodybe.")
 elif num == 1:
     n = input("You've asked for the first N Fibonnaci numbers. What is N? ")
-    firstNFibNumbers(n)
+    firstNFibNumbrs(n)
 elif num == 2:
     n = input("You've asked for the ith Fibonnaci number. What is i? ")
     iFibNumber(n)
