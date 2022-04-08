@@ -39,9 +39,9 @@ class ControlGame:
         # If the current player is 'Red', set it to 'Blue', and 
         # vice versa.
         if self.currentPlayer == "Red":
-            self.currentPlayer == "Blue"
+            self.currentPlayer = "Blue"
         else:
-            self.currentPlayer == "Red"
+            self.currentPlayer = "Red"
     
     def getBoardState(self):
         # Return the current board.
@@ -54,6 +54,7 @@ class ControlGame:
         # occupied.  If the checks pass add the current player's
         # token to that cell.  Finally, return a Boolean value 
         # indicating whether or not the turn occurred.
+        
         if row > 7 or row < 0 or col > 7 or col < 0:
             print("Invalid turn, Cannot place piece on occupied cell")
             return False
@@ -66,6 +67,9 @@ class ControlGame:
                     self.board[row][col] = "B"
                 elif self.currentPlayer == "Red":
                     self.board[row][col] = "R"
+
+                # self.currentPlayer = "Blue"
+                self.swapCurrentPlayer()
                 return True
     
     def getScore(self):
@@ -87,25 +91,24 @@ class ControlGame:
                     blueCol.append("1")
 
 
-                redRow = []
-                blueRow = []
-                for row in range(len(self.board)):
+            redRow = []
+            blueRow = []
+            for row in range(len(self.board)):
+                if self.board[row][i] == "R":
+                    redRow.append("1")
+                elif self.board[row][i] == "B":
+                    blueRow.append("1")
 
-                    if self.board[row][col] == "R":
-                        redRow.append("1")
-                    elif self.board[row][col] == "B":
-                        blueRow.append("1")
-                if len(redRow) > len(blueRow):
-                    red += 1
-                elif len(redRow) < len(blueRow):
-                    blue += 1
-            
+            if len(redRow) > len(blueRow):
+                red += 1
+            elif len(redRow) < len(blueRow):
+                blue += 1
+        
             if len(redCol) > len(blueCol):
                 red += 1
             elif len(redCol) < len(blueCol):
                 blue += 1
                 
-           self.takeTurn()
 
         return red, blue
 
