@@ -104,6 +104,8 @@ class ControlGame:
                 red += 1
             elif len(redCol) < len(blueCol):
                 blue += 1
+                
+           self.takeTurn()
 
         return red, blue
 
