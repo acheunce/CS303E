@@ -73,39 +73,38 @@ class ControlGame:
         # Red and Blue.  Return this as a pair (red, blue).  This is
         # the most complicated method, so it's probably a good idea 
         # to write subsidiary functions for this.
-        redRow = []
-        blueRow = []
-        redCol = []
-        blueCol = []
         red = 0
         blue = 0
-        index = 0
+        
+        for i in range(len(self.board)):
+            redCol = []
+            blueCol = []
+            for col in range(len(self.board)):
 
-        for col in range(len(self.board)):
+                if self.board[i][col] == "R":
+                    redCol.append("1")
+                elif self.board[i][col] == "B":
+                    blueCol.append("1")
 
+
+                redRow = []
+                blueRow = []
+                for row in range(len(self.board)):
+
+                    if self.board[row][col] == "R":
+                        redRow.append("1")
+                    elif self.board[row][col] == "B":
+                        blueRow.append("1")
+                if len(redRow) > len(blueRow):
+                    red += 1
+                elif len(redRow) < len(blueRow):
+                    blue += 1
+            
             if len(redCol) > len(blueCol):
                 red += 1
             elif len(redCol) < len(blueCol):
                 blue += 1
 
-            if self.board[index][col] == "R":
-                redCol.append("1")
-            elif self.board[index][col] == "B":
-                blueCol.append("1")
-
-            for row in range(len(self.board)):
-    
-                if len(redRow) > len(blueRow):
-                    red += 1
-                elif len(redRow) < len(blueRow):
-                    blue += 1
-
-                if self.board[row][col] == "R":
-                    redRow.append("1")
-                elif self.board[row][col] == "B":
-                    blueRow.append("1")
-            index += 1
-        
         return red, blue
 
         pass
