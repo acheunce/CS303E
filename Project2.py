@@ -8,25 +8,26 @@
 
 
 commands = ["0", "1", "2", "3", "4", "5", "6"]
+error0 = ("ERROR: Illegal command. Try again\n")
 error1 = ("ERROR: Answer must be 1, 2 or 3. Try again.\n")
-error2 = ("ERROR: Illegal value entered")
+error2 = ("ERROR: Illegal value entered\n")
 
 
-def errorQuestion1(val, lowerBound, upperBound, error): # inspired from ControlGameDriver by Sam
+def errorQuestion(val, lowerBound, upperBound, error): # inspired from ControlGameDriver by Sam
     while True: 
         answer = input(val).strip()
         if answer.isdigit():
-            command = int(val)
+            command = int(answer)
             if lowerBound == None and upperBound == None:
                 break
             elif lowerBound == None:
                 if command > upperBound:
-                    print(error1)
+                    print(error)
                 else:
                     break
             elif upperBound == None:
                 if command < lowerBound:
-                    print(error1)
+                    print(error)
                 else:
                     break
             else:
@@ -36,21 +37,9 @@ def errorQuestion1(val, lowerBound, upperBound, error): # inspired from ControlG
                     break
         else:
             print(error)
-    return answer
+    return command
 
-    
-def intro():
-    print("Welcome to the Fibonnaci Number laboratory!\n")
-    print("The following commands are available:")
-    print("  0: Exit.")
-    print("  1: List the first N Fibonnaci numbers.")
-    print("  2: Display the ith Fibonnaci number (0-based).")
-    print("  3: List the Fibonnaci numbers less or equal to N.")
-    print("  4: How many Fibonnaci numbers are less or equal to N?")
-    print("  5: Find a list of the largest Fibonnaci numbers that add up to N.")
-    print("  6: Display this help message. \n")
-    
-    return errorQuestion1("Please enter a command (0, 1, 2, 3, 4, 5 or 6): ", 0, 6, error1)
+
 
 
 
@@ -135,26 +124,35 @@ def sumToFib(N):
                 break
         return sumFibs
             
+loop = True
+print("Welcome to the Fibonnaci Number laboratory!\n")
+print("The following commands are available:")
+print("  0: Exit.")
+print("  1: List the first N Fibonnaci numbers.")
+print("  2: Display the ith Fibonnaci number (0-based).")
+print("  3: List the Fibonnaci numbers less or equal to N.")
+print("  4: How many Fibonnaci numbers are less or equal to N?")
+print("  5: Find a list of the largest Fibonnaci numbers that add up to N.")
+print("  6: Display this help message. \n")
+while loop:    
+    num = errorQuestion("Please enter a command (0, 1, 2, 3, 4, 5 or 6): ", 0, 6, error0)
 
-#userInput(intro())
-num = intro()
-
-if num == 0:
-    print("\nThanks for using the Fibonnaci Labratory! Goodybe.")
-elif num == 1:
-    n = input("You've asked for the first N Fibonnaci numbers. What is N? ")
-    firstNFibNumbrs(errorQuestion2(n), 0, None, error2)
-elif num == 2:
-    n = input("You've asked for the ith Fibonnaci number. What is i? ")
-    iFibNumber(errorQuestion2(n), 0, None, error2)
-elif num == 3:
-    n = input("You've asked for the Fibonnaci numbers less than or equal to N. What is N? ")
-    lessThanFib(errorQuestion2(n, None, None, error2))
-elif num == 4:
-    n = input("You've asked how many Fibonnaci numbers are less than or equal to N. What is N? ")
-    lessThanEqFib(errorQuestion2(n, None, None, error2))
-elif num == 5:
-    n = input("You've asked for Fibonnaci numbers that sum to N. What is N? ")
-    sumToFib(errorQuestion2(n, 0, None, error2))
-elif num == 6:
-    userInput(intro())
+    if num == 0:
+        print("\nThanks for using the Fibonnaci Labratory! Goodybe.")
+        loop = False
+    elif num == 1:
+        firstNFibNumbers(errorQuestion("You've asked for the first N Fibonnaci numbers. What is N? ", 0, None, error2))
+    elif num == 2:
+        n = input("You've asked for the ith Fibonnaci number. What is i? ")
+        iFibNumber(errorQuestion(n, 0, None, error2))
+    elif num == 3:
+        n = input("You've asked for the Fibonnaci numbers less than or equal to N. What is N? ")
+        lessThanFib(errorQuestion(n, None, None, error2))
+    elif num == 4:
+        n = input("You've asked how many Fibonnaci numbers are less than or equal to N. What is N? ")
+        lessThanEqFib(errorQuestion(n, None, None, error2))
+    elif num == 5:
+        n = input("You've asked for Fibonnaci numbers that sum to N. What is N? ")
+        sumToFib(errorQuestion(n, 0, None, error2))
+    elif num == 6:
+        userInput(intro())
