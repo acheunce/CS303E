@@ -41,6 +41,30 @@ def fillTriangle(ttl, v1, v2, v3, fill, color):
     else:
         drawTriangle(ttl, v1, v2, v3)
 
+def drawStar(ttl, startX, startY): # each point is 36 degrees
+    ttl.goto(startX, startY) # vertex 1
+    ttl.pendown()
+    ttl.goto(startX + 13, startY - 33)
+    ttl.goto(startX + 50, startY - 33) # vertex 2
+    ttl.goto(startX + 19, startY - 55)
+    ttl.goto(startX + 30, startY - 90) # vertex 3
+    ttl.goto(startX, startY - 70)
+    ttl.goto(startX - 30, startY - 90) # vertex 4
+    ttl.goto(startX - 19, startY - 55)
+    ttl.goto(startX - 50, startY - 33) # vertex 5
+    ttl.goto(startX - 13, startY - 33)
+    ttl.goto(startX, startY)
+
+def fillStar(ttl, startX, startY, fill, color):
+    if fill:
+        ttl.fillcolor(color)
+        ttl.begin_fill()
+        drawStar(ttl, startX, startY)
+        ttl.end_fill()
+    else:
+        drawTriangle(ttl, startX, startY)
+
+
 def drawPuertoRicoFlag(ttl, x, y):
     ttl.penup()
     ttl.goto(x, y)
@@ -66,8 +90,10 @@ def drawPuertoRicoFlag(ttl, x, y):
     ttl.penup()
     ttl.goto(x, y)
 
-    fillTriangle(ttl, (-300, -200), (0,0), (-300, 200), True, 'navy')
+    fillTriangle(ttl, (x, y), (0,0), (x, y + 400), True, 'navy')
 
+    ttl.penup()
+    fillStar(ttl, x + 100, y +250, True, 'white')
     
 
 
