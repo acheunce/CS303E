@@ -7,7 +7,7 @@
 # Description of Program: Wordle Game
 
 import os.path
-from typing import ParamSpecArgs
+
 
 def Welcome():
     
@@ -24,9 +24,11 @@ def Welcome():
        ^ means that the letter is correct and in the correct location
        + means that the letter is correct, but in the wrong location
     
-    Good luck!""")
+    Good luck!\n""")
     
-    input("Enter the name of the file from which to extract the wordlist: ")
+def wordOK(word):
+    return len(word) == 5 and word[len(word) - 1] != 's'
+
 
 def CreateWordlist(filename): 
     """ Read words from the provided file and store them in a list.
@@ -40,15 +42,10 @@ def CreateWordlist(filename):
     newWordlist = []
     for word in wordlist:
         word1 = word.strip()
-        if len(word1) == 5 and word1[len(word1) - 1] != 's':
-            # wordlist.pop(index)
-            duplicate = False
-            for char in word1:
-                if word1.count(char) > 1:
-                    duplicate = True
-            if not duplicate:
-                newWordlist.append(word1)
-    return newWordlist, len(newWordlist)
+        if wordOK(word1):
+            newWordlist.append(word1)
+    return newWordlist
+
 
 def BinarySearch(lst,key):
    low = 0
@@ -63,12 +60,6 @@ def BinarySearch(lst,key):
          low = mid + 1
    return (-low - 1)
 
-def WordSearch(wordlist, word):
-    if BinarySearch(wordlist, ) > 0:
-        
-
-    pass
-
 
 def GetFileName():
     while True:
@@ -78,21 +69,32 @@ def GetFileName():
         else:
             print("File does not exist. Try again!")
 
-def ChooseWord(newWordlist, length):
-    pass
-
-def Parse(word):
-    feedback = ""
-    for i in range(6):
-        guess = input("Enter your guess " + "(" + str(i) + "): ")
-        for i in range(len(guess)):
-            print(guess[i].upper(), end = "  ")
-            if guess[i].lower() == word[i].lower():
-                feedback += "^  "
-            else:
-                feedback += "x  "
-        print("\n " + feedback)
-        if guess.lower() == word.lower():
+def Parse(word, wordlist):
+    wrong = True
+    for i in range(6): 
+        feedback = ""
+        word = word.lower()
+        guess = input("Enter your guess " + "(" + str(i + 1) + "): ").lower()
+        if BinarySearch(wordlist, guess) < 0:
+            print("Guess must be a 5-letter word in the wordlist.  Try again!")
+        else:
+            for i in range(len(guess)):
+                print(guess[i].upper(), end = "  ")
+                if guess[i] in word:
+                    if guess[i] == word[i]:
+                        feedback += "^  "
+                    else:
+                        feedback += "+  "
+                else:
+                    feedback += "x  "
+            print("\n" + feedback)
+        if guess == word:
             print("CONGRAULATIONS! You win!")
+            wrong = False
             break
-    print("Sorry! The word was " + word + ". Better luck next time!")
+    if wrong:
+        print("Sorry! The word was " + word + ". Better luck next time!")
+
+def PlayWordle(word):
+    Welcome()
+    Parse(word, CreateWordlist(GetFileName()))
