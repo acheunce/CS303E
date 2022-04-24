@@ -8,6 +8,11 @@
 
 import turtle
 
+
+myBlue   = '#00205B'
+myRed    = '#EF3340'
+myWhite  = '#FFFFFF'
+
 def drawRectangle(ttl, width, height):
     ttl.forward(width)
     ttl.left(90)
@@ -73,27 +78,27 @@ def drawPuertoRicoFlag(ttl, x, y):
     drawRectangle(ttl, 600, 400)
     
     ttl.setheading(0)
-    fillRectangle(ttl, 600, 80, True, 'firebrick1')
+    fillRectangle(ttl, 600, 80, True, myRed)
 
     ttl.setheading(0)
     ttl.penup()
     ttl.goto(x, y + 160)
     ttl.pendown()
-    fillRectangle(ttl, 600, 80, True, 'firebrick1')
+    fillRectangle(ttl, 600, 80, True, myRed)
 
     ttl.setheading(0)
     ttl.penup()
     ttl.goto(x, y + 320)
     ttl.pendown()
-    fillRectangle(ttl, 600, 80, True, 'firebrick1')
+    fillRectangle(ttl, 600, 80, True, myRed)
 
     ttl.penup()
     ttl.goto(x, y)
 
-    fillTriangle(ttl, (x, y), (0,0), (x, y + 400), True, 'navy')
+    fillTriangle(ttl, (x, y), (0,0), (x, y + 400), True, myBlue)
 
     ttl.penup()
-    fillStar(ttl, x + 100, y +250, True, 'white')
+    fillStar(ttl, x + 100, y + 250, True, myWhite)
     
 
 
