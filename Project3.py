@@ -7,7 +7,7 @@
 # Description of Program: Wordle Game
 
 import os.path
-
+import random
 
 def Welcome():
     
@@ -108,8 +108,11 @@ def Parse(word, wordlist):
     else:
         print("Answer supplied is not legal.\n")
 
-def PlayWordle(word):
+def PlayWordle(word=None):
     Welcome()
-    Parse(word, CreateWordlist(GetFileName()))
+    wordlist = CreateWordlist(GetFileName())
+    if word == None:
+        word = random.choice(wordlist)
+    Parse(word, wordlist)
 
-PlayWordle("level")
+PlayWordle()
