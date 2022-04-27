@@ -12,19 +12,19 @@ import os.path
 def Welcome():
     
     print("""Welcome to WORDLE, the popular word game. The goal is to guess a
-    five letter word chosen at random from our wordlist.  None of the
-    words on the wordlist have any duplicate letters.
-    
-    You will be allowed 6 guesses.  Guesses must be from the allowed
-    wordlist.  We'll tell you if they're not.
-    
-    Each letter in your guess will be marked as follows:
-    
-       x means that the letter does not appear in the answer
-       ^ means that the letter is correct and in the correct location
-       + means that the letter is correct, but in the wrong location
-    
-    Good luck!\n""")
+five letter word chosen at random from our wordlist.  None of the
+words on the wordlist have any duplicate letters.
+
+You will be allowed 6 guesses.  Guesses must be from the allowed
+wordlist.  We'll tell you if they're not.
+
+Each letter in your guess will be marked as follows:
+
+   x means that the letter does not appear in the answer
+   ^ means that the letter is correct and in the correct location
+   + means that the letter is correct, but in the wrong location
+
+Good luck!\n""")
     
 def wordOK(word):
     return len(word) == 5 and word[len(word) - 1] != 's'
@@ -42,8 +42,14 @@ def CreateWordlist(filename):
     newWordlist = []
     for word in wordlist:
         word1 = word.strip()
-        if wordOK(word1):
-            newWordlist.append(word1)
+        if len(word1) == 5 and word1[len(word1) - 1] != 's':
+            # wordlist.pop(index)
+            duplicate = False
+            for char in word1:
+                if word1.count(char) > 1:
+                    duplicate = True
+            if not duplicate:
+                newWordlist.append(word1)
     return newWordlist
 
 
@@ -64,37 +70,46 @@ def BinarySearch(lst,key):
 def GetFileName():
     while True:
         file = input("Enter the name of the file from which to extract the wordlist: ")
-        if os.path.exists(file + ".txt"):
+        file = file + ".txt"
+        if os.path.exists(file):
+            print()
             return file
         else:
             print("File does not exist. Try again!")
 
 def Parse(word, wordlist):
-    wrong = True
-    for i in range(6): 
-        feedback = ""
-        word = word.lower()
-        guess = input("Enter your guess " + "(" + str(i + 1) + "): ").lower()
-        if BinarySearch(wordlist, guess) < 0:
-            print("Guess must be a 5-letter word in the wordlist.  Try again!")
-        else:
-            for i in range(len(guess)):
-                print(guess[i].upper(), end = "  ")
-                if guess[i] in word:
-                    if guess[i] == word[i]:
-                        feedback += "^  "
+    if word in wordlist:
+        wrong = True
+        index = 0
+        while index < 6: 
+            feedback = ""
+            word = word.lower()
+            guess = input("Enter your guess " + "(" + str(index + 1) + "): ").lower()
+            if BinarySearch(wordlist, guess) < 0:
+                print("Guess must be a 5-letter word in the wordlist.  Try again!")
+            else:
+                for i in range(len(guess)):
+                    print(guess[i].upper(), end = "  ")
+                    if guess[i] in word:
+                        if guess[i] == word[i]:
+                            feedback += "^  "
+                        else:
+                            feedback += "+  "
                     else:
-                        feedback += "+  "
-                else:
-                    feedback += "x  "
-            print("\n" + feedback)
-        if guess == word:
-            print("CONGRAULATIONS! You win!")
-            wrong = False
-            break
-    if wrong:
-        print("Sorry! The word was " + word + ". Better luck next time!")
+                        feedback += "x  "
+                print("\n" + feedback)
+                index += 1
+            if guess == word:
+                print("CONGRAULATIONS! You win!")
+                wrong = False
+                break
+        if wrong:
+            print("Sorry! The word was " + word + ". Better luck next time!")
+    else:
+        print("Answer supplied is not legal\n")
 
 def PlayWordle(word):
     Welcome()
     Parse(word, CreateWordlist(GetFileName()))
+
+PlayWordle("level")
