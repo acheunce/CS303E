@@ -11,7 +11,7 @@ import os.path
 
 def Welcome():
     
-    print("""Welcome to WORDLE, the popular word game. The goal is to guess a
+    print("""\nWelcome to WORDLE, the popular word game. The goal is to guess a
 five letter word chosen at random from our wordlist.  None of the
 words on the wordlist have any duplicate letters.
 
@@ -100,13 +100,13 @@ def Parse(word, wordlist):
                 print("\n" + feedback)
                 index += 1
             if guess == word:
-                print("CONGRAULATIONS! You win!")
+                print("CONGRATULATIONS! You win!\n")
                 wrong = False
                 break
         if wrong:
-            print("Sorry! The word was " + word + ". Better luck next time!")
+            print("Sorry!  The word was " + word + ". Better luck next time!\n")
     else:
-        print("Answer supplied is not legal\n")
+        print("Answer supplied is not legal.\n")
 
 def PlayWordle(word):
     Welcome()
